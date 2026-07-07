@@ -1,1 +1,31 @@
+import java.util.Scanner;
+public class Main{
+    static int[] OptimalprefixSum(int arr[]){
+	int Pf[] = new int[arr.length];// creating array of same size of arr to store prefix sum ; remember why [] because putting inplace of size
+     Pf[0]=arr[0];
+	for(int i=1;i<arr.length;i++){
+       Pf[i] = Pf[i-1]+arr[i];
+	}
+	return Pf;
 
+	}
+
+	public static void main(String[] args){
+		
+	Scanner scan = new Scanner(System.in);
+    int size = scan.nextInt();
+	int arr[] = new int[size];
+
+	for(int i=0;i<arr.length;i++){
+		arr[i] = scan.nextInt();
+	}	
+
+	int Pf[] = OptimalprefixSum(arr);
+
+	for(int i=0;i<Pf.length;i++){
+		System.out.print(Pf[i]+" ");
+
+	}
+
+	}
+}
