@@ -1,0 +1,152 @@
+// Without comments
+
+import java.util.Scanner;
+public class Main {
+
+    static int[] Prefix(int[] arr){
+        int n = arr.length;
+		int PrefixMax[] = new int[n];
+		 PrefixMax[0] = arr[0];
+
+		for(int i=1;i<n;i++){
+			PrefixMax[i]= Math.max(PrefixMax[i-1],arr[i]);
+		}
+        return PrefixMax;
+	}
+
+	static int[] Suffix(int[] arr){
+        int n = arr.length;
+		int SuffixMax[] = new int[n];
+		 SuffixMax[n-1] = arr[n-1];
+
+		for(int i=n-2;i>=0;i--){
+			SuffixMax[i]= Math.max(SuffixMax[i+1],arr[i]);
+		}
+        return SuffixMax;
+	}
+
+
+    static int RainWaterTrapping(int[] arr){
+		int n = arr.length;
+		int[] PrefixMax = Prefix(arr);
+		int[] SuffixMax = Suffix(arr);
+        int amount = 0;
+        for(int i=1;i<n-1;i++){
+		int leftBlock = PrefixMax[i];
+		int rightBlock = SuffixMax[i];
+		int yourBlockade = Math.min(leftBlock,rightBlock);
+		int contri = yourBlockade-arr[i];
+
+		amount += (yourBlockade - arr[i]);
+		}
+		return amount;
+	}
+
+	public static void main(String[] args) {
+		// write your code here
+		 Scanner scan = new Scanner(System.in);
+		 int n = scan.nextInt();
+		 int arr[] = new int[n];
+
+		 int i=0;
+		 while(i<n){
+			int currentInput = scan.nextInt();
+
+			if(currentInput>=0){
+				arr[i] = currentInput;
+				i++;
+			}
+		 }
+		       int amount = RainWaterTrapping(arr);
+			   System.out.println(amount);
+		 }
+	}
+
+
+
+
+
+
+
+
+
+
+
+
+//With Comments
+
+import java.util.Scanner;
+
+public class Main {
+
+    // Method to find the tallest building from the left for every position
+    static int[] Prefix(int[] arr){
+        int n = arr.length;
+        int PrefixMax[] = new int[n]; // Create array to store left-side peak heights
+        PrefixMax[0] = arr[0];        // First building has no left neighbors; it's its own max
+
+        for(int i = 1; i < n; i++){
+            // Current max is either the previous max or the current building itself
+            PrefixMax[i] = Math.max(PrefixMax[i - 1], arr[i]);
+        }
+        return PrefixMax;
+    }
+
+    // Method to find the tallest building from the right for every position
+    static int[] Suffix(int[] arr){
+        int n = arr.length;
+        int SuffixMax[] = new int[n]; // Create array to store right-side peak heights
+        SuffixMax[n - 1] = arr[n - 1]; // Last building has no right neighbors; it's its own max
+
+        for(int i = n - 2; i >= 0; i--){
+            // Scan backward: current max is either the next max to the right or the current building
+            SuffixMax[i] = Math.max(SuffixMax[i + 1], arr[i]);
+        }
+        return SuffixMax;
+    }
+
+    // Main logic method to calculate trapped rainwater
+    static int RainWaterTrapping(int[] arr){
+        int n = arr.length;
+        int[] PrefixMax = Prefix(arr); // Get all left peaks
+        int[] SuffixMax = Suffix(arr); // Get all right peaks
+        int amount = 0;                // Counter to hold total trapped water
+        
+        // Loop through every single building position
+        for(int i = 0; i < n; i++){
+            int leftBlock = PrefixMax[i];  // Tallest wall to the left (inclusive)
+            int rightBlock = SuffixMax[i]; // Tallest wall to the right (inclusive)
+            
+            // Water level is limited by the shorter of the two walls
+            int yourBlockade = Math.min(leftBlock, rightBlock);
+            
+            // Trapped water at this spot = water level height minus the building's own height
+            int contri = yourBlockade - arr[i];
+            
+            // Add this spot's water to our running total
+            amount += contri; 
+        }
+        return amount;
+    }
+
+    public static void main(String[] args) {
+         Scanner scan = new Scanner(System.in);
+         int n = scan.nextInt(); // Read the total number of bars
+         int arr[] = new int[n]; // Initialize the array with user's size
+
+         int i = 0;
+         // Input validation loop: ensures we collect exactly 'n' valid inputs
+         while(i < n){
+            int currentInput = scan.nextInt(); // Read input exactly once
+
+            if(currentInput >= 0){
+                arr[i] = currentInput; // Store valid input
+                i++;                   // Only move pointer forward if input is valid
+            }
+         }
+         
+         int amount = RainWaterTrapping(arr); // Run the calculation
+         System.out.println(amount);          // Print final answer
+    }
+}
+
