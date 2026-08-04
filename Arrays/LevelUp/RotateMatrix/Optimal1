@@ -1,0 +1,134 @@
+Arrays3_RotateMatrix
+Success rate: 33.86%
+You are given an n x n 2D matrix representing an image. Rotate the image by 90 degrees (clockwise).
+
+You have to rotate the image in-place, which means you have to modify the input 2D matrix directly. DO NOT allocate another 2D matrix and do the rotation.
+
+Input Format:
+The first line contains an integer n (size of the matrix).
+The next n lines each contain n space-separated integers representing the elements of the matrix.
+
+Output Format:
+Output the rotated matrix as n lines, each containing n space-separated integers.
+
+Constraints:
+n == matrix.length == matrix[i].length
+1 <= n <= 20
+-1000 <= matrix[i][j] <= 1000
+
+Sample test cases
+Input
+3
+1 2 3
+4 5 6
+7 8 9
+Expected output
+7 4 1 
+8 5 2 
+9 6 3 
+
+
+Code: My solution (O(N^2)) 
+
+import java.util.Scanner;
+public class Main {
+	static void transpose(int[][] arr){
+		for(int i=1;i<arr.length;i++){
+			for(int j=0;j<i;j++){
+			int temp = arr[i][j];
+			arr[i][j] = arr[j][i];
+			arr[j][i] = temp;
+			}
+		}
+	}
+	static void rotateMatrix(int[][] arr){
+		transpose(arr);
+		for(int i=0;i<arr.length;i++){
+		int sp = 0;
+		int ep = arr[0].length-1;
+		
+        while(sp<ep){
+			int temp = arr[i][sp];
+			arr[i][sp] = arr[i][ep];
+			arr[i][ep] = temp;
+			sp++;
+			ep--;
+		}
+		}
+		for(int i=0;i<arr.length;i++){
+			for(int j=0;j<arr[0].length;j++){
+				System.out.print(arr[i][j]+" ");
+			}
+			System.out.println();
+		}
+	}
+	public static void main(String[] args) {
+		// write your code here
+		Scanner scan = new Scanner(System.in);
+		int size = scan.nextInt();
+		int[][] arr = new int[size][size];
+		for(int i=0;i<size;i++){
+			for(int j=0;j<size;j++){
+				arr[i][j] = scan.nextInt();
+			}
+		}
+		rotateMatrix(arr);
+	}
+}
+
+----------------------------------------------------------------------
+2. Fast I/O Optimization (For Online Judges)In competitive programming, standard Scanner and System.out.print are 
+usually what cause time limit issues (TLE) on large inputs ($N \ge 1000$), not the matrix algorithm itself.
+Using BufferedReader and StringBuilder cuts down the I/O bottleneck significantly:
+
+
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.util.StringTokenizer;
+
+public class Main {
+    public static void main(String[] args) throws Exception {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        int n = Integer.parseInt(br.readLine().trim());
+        int[][] arr = new int[n][n];
+
+        for (int i = 0; i < n; i++) {
+            StringTokenizer st = new StringTokenizer(br.readLine());
+            for (int j = 0; j < n; j++) {
+                arr[i][j] = Integer.parseInt(st.nextToken());
+            }
+        }
+
+        // Rotate in-place (Transpose + Reverse)
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < i; j++) {
+                int temp = arr[i][j];
+                arr[i][j] = arr[j][i];
+                arr[j][i] = temp;
+            }
+        }
+        for (int i = 0; i < n; i++) {
+            int sp = 0, ep = n - 1;
+            while (sp < ep) {
+                int temp = arr[i][sp];
+                arr[i][sp] = arr[i][ep];
+                arr[i][ep] = temp;
+                sp++; ep--;
+            }
+        }
+
+        // Fast Output Buffer
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < n; j++) {
+                sb.append(arr[i][j]).append(" ");
+            }
+            sb.append("\n");
+        }
+        System.out.print(sb);
+    }
+}
+
+
+
+
