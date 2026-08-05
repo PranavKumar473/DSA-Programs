@@ -1,0 +1,96 @@
+Arrays5_Print Spiral
+Success rate: 39.39%
+Given an m x n matrix, return all the elements of the matrix in spiral order.
+
+Input Format:
+An integer m (number of rows).
+An integer n (number of columns).
+A 2D matrix of size m x n where each element is an integer.
+
+Output Format:
+A list of integers representing the elements of the matrix in spiral order.
+
+Constraints:
+m == matrix.length
+n == matrix[i].length
+1 <= m, n <= 10
+-100 <= matrix[i][j] <= 100
+
+Sample test cases
+Input
+4 3
+1 2 3
+4 5 6
+7 8 9
+10 11 12
+Expected output
+1 2 3 6 9 12 11 10 7 4 5 8 
+
+//Code:  T.C : O(M*N)
+
+import java.util.Scanner;
+public class Main {
+
+    static void spiral(int[][] mat){
+		int i=0;
+		int j=0;
+		int m = mat.length;
+		int n = mat[0].length;
+
+		int rsteps = m-1; //no.of rowsteps
+		int csteps = n-1; //no. of columnsteps
+
+		while(rsteps>=1 && csteps>=1){
+			for(int k=0;k<csteps;k++){
+				System.out.print(mat[i][j]+" ");
+				j++;
+			}
+			for(int k=0;k<rsteps;k++){
+				System.out.print(mat[i][j]+" ");
+				i++;
+			}
+			for(int k=0;k<csteps;k++){
+				System.out.print(mat[i][j]+" ");
+				j--;
+			}
+			for(int k=0;k<rsteps;k++){
+				System.out.print(mat[i][j]+" ");
+				i--;
+			}
+			i++;
+			j++;
+			rsteps -= 2;
+			csteps -= 2;
+		}
+		if(rsteps == 0){
+          for(int k=0;k<csteps+1;k++){
+			System.out.print(mat[i][j]+" ");
+			j++;
+		  }
+		}
+		else if(csteps == 0){
+          for(int k=0;k<rsteps+1;k++){
+			System.out.print(mat[i][j]+" ");
+			i++;
+		  }
+		}
+	}
+	public static void main(String[] args) {
+		// write your code here
+		Scanner scan = new Scanner(System.in);
+		int m = scan.nextInt(); //no. of rows
+		int n = scan.nextInt(); // no. of columns
+       int[][] mat = new int[m][n];
+
+    for(int i = 0;i<m;i++){
+		for(int j=0;j<n;j++){
+			mat[i][j] = scan.nextInt();
+		}
+	}
+	   spiral(mat);
+	}
+}
+
+
+Take care: 1. Input elements to fill matrix
+           2. Give proper space at last condition (if and else if)
