@@ -1,0 +1,76 @@
+Arrays5_Print Spiral in Square Matrix
+Success rate: 32.54%
+Given a square matrix of N*N, print the Spiral order of the matrix.
+
+Input Format:
+First line contains an integer n representing size of matrix.
+Each of next n lines contain n integer representing array elements.
+
+Output Format:
+Print the spiral form of the matrix.
+
+Constraints:
+1 <= N <= 100
+1 <= arr[i] <= 10^4
+
+Sample test cases
+Input
+3
+1 2 3
+4 5 6
+7 8 9
+Expected output
+1 2 3 6 9 8 7 4 5 
+
+Code: T.C : O(N^2) , S.C: O(1)
+
+import java.util.Scanner;
+public class Main {
+
+    static void SquareSpiral(int[][] mat){
+		int i=0;
+		int j=0;
+		int steps = mat.length-1;
+
+		while(steps>=1){
+			for(int k=0;k<steps;k++){
+				System.out.print(mat[i][j]+" ");
+				j++;
+			}
+			for(int k=0;k<steps;k++){
+				System.out.print(mat[i][j]+" ");
+				i++;
+			}
+			for(int k=0;k<steps;k++){
+				System.out.print(mat[i][j]+" ");
+				j--;
+			}
+			for(int k=0;k<steps;k++){
+				System.out.print(mat[i][j]+" ");
+				i--;
+			}
+			i++;
+			j++;
+			steps -= 2;
+		}
+		if(steps == 0){
+			System.out.print(mat[i][j]+" ");
+		}
+	}
+
+	public static void main(String[] args) {
+		// write your code here
+		Scanner scan = new Scanner(System.in);
+		int size = scan.nextInt(); 
+       int[][] mat = new int[size][size];
+
+    for(int i = 0;i<size;i++){
+		for(int j=0;j<size;j++){
+			mat[i][j] = scan.nextInt();
+		}
+	}
+	   SquareSpiral(mat);
+	}
+}
+
+// Take care of the steps.
