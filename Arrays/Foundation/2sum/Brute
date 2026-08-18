@@ -6,7 +6,7 @@ Input Format:
 Each of the test cases have 3 lines.
 The First line contains the size of the array n.
 The second line contains the n elements of the array.
-The third line contains an integer k
+The third line contains an integer k 
 
 Output Format:
 Print true if there is a valid pair present else print false.
