@@ -29,7 +29,7 @@ public class Main {
 		int ans = 0;
 		int occ = 0;
 		for(int i=0;i<arr.length;i++){
-			occ = (i+1)*(arr.length-i);
+			occ = (i+1)*(arr.length-i); // Number of elements = upperlimit - lowerlimit + 1
 			ans = ans + occ*(arr[i]);
 		}
 		System.out.println(ans);
