@@ -30,6 +30,9 @@ public class Main {
 		int occ = 0;
 		for(int i=0;i<arr.length;i++){
 			occ = (i+1)*(arr.length-i); // Number of elements = upperlimit - lowerlimit + 1
+                                        // start elements = 0 to i  -----> Number of elements = i-0+1   = (i+1) elements
+                                        // end elements   = i to n-1 ----> Number of elements = n-1-i+1 = (n-i) elements
+                                        // Total occurence/ combinations possible = (i+1)*(n-i) 
 			ans = ans + occ*(arr[i]);
 		}
 		System.out.println(ans);
