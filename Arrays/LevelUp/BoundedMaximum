@@ -1,0 +1,108 @@
+Arrays2_BoundedMaximum
+Success rate: 32.95%
+Given an integer array nums and two integers left and right, return the number of contiguous non-empty subarrays such that the value of the maximum array element in that subarray is in the range [left, right].
+
+Input Format:
+The first line contains an integer n (length of the array nums).
+The second line contains n space-separated integers representing the elements of the array nums.
+The third line contains two space-separated integers left and right.
+
+Output Format:
+A single integer representing the number of contiguous non-empty subarrays where the value of the maximum 
+array element in that subarray is in the range [left, right].
+
+Constraints:
+1 <= nums.length <= 105
+0 <= nums[i] <= 109
+0 <= left <= right <= 109
+
+Sample test cases
+Input
+5
+2 9 2 5 6
+2 8
+Expected output
+7
+Input
+5
+2 1 4 3 5
+2 4
+Expected output
+9
+
+----------------------------------------------------
+T.C: O(N^2), S.C: O(1)
+
+import java.util.Scanner;
+public class Main {
+    static void boundedMaximum(int[] nums, int left, int right){
+		int n = nums.length;
+		int count = 0;
+		for(int i=0;i<n;i++){
+        int currentMax = Integer.MIN_VALUE;
+		for(int j=i;j<n;j++){
+        currentMax = Math.max(currentMax,nums[j]);
+
+        if(currentMax>=left && currentMax<=right){
+			  count++;
+			 }
+		 }
+  }
+	 System.out.println(count); 
+	}
+
+
+-----------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	public static void main(String[] args) {
+		// write your code here
+		Scanner scan = new Scanner(System.in);
+		int n = scan.nextInt();
+		int[] nums = new int[n];
+
+		for(int i=0;i<n;i++){
+			nums[i] = scan.nextInt();
+		}
+		int left  = scan.nextInt();
+		int right = scan.nextInt();
+
+    boundedMaximum(nums,left,right);
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
