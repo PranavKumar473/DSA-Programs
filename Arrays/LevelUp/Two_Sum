@@ -41,36 +41,6 @@ public class Main {
 		}
 		return new int[]{};
 	}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     inside main(){
 	  int arr[]=check(nums,target);
 	  
@@ -88,3 +58,67 @@ public class Main {
 	  System.out.println();
 	}
 }
+
+
+
+
+//Way-2   2/6 test case passes 
+
+import java.util.Scanner;
+public class Main {
+    static int[] check(int[] nums, int target){
+		int i=0;
+		int j=nums.length-1;
+        while(i<j){
+		if(nums[i]+nums[j]>target){
+			j--;
+		}
+		else if(nums[i]+nums[j]<target){
+			i++;
+		}
+		else{
+			return new int[]{i,j};
+		}
+	 }
+		return new int[]{};
+	
+	}
+	public static void main(String[] args) {
+		// write your code here
+	  Scanner scan = new Scanner(System.in);
+	  int n = scan.nextInt();
+	  int nums[]  = new int[n];
+ 
+      for(int i=0;i<n;i++){
+		nums[i] = scan.nextInt();
+	  }
+	  int target = scan.nextInt();
+
+// Sorting the array first to make TWO pointer reliable but sorting disturbs the initial index position 
+//so now i have to keep track of initial index positions as well.
+
+	  for(int i=1;i<n;i++){
+		for(int j=i-1;j>=0;j--){
+			if(nums[j]>nums[j+1]){
+				int temp = nums[j];
+				nums[j] = nums[j+1];
+				nums[j+1] = temp;
+			}else{
+				break;
+			}
+		}
+}
+	  int arr[]=check(nums,target);
+	  for(int i=0;i<arr.length;i++){
+		System.out.print(i);
+		if(i<arr.length-1){
+			System.out.print(" ");
+		}
+	  }
+	  System.out.println();	 
+   }
+}
+
+
+
+
