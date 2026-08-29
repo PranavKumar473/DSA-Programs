@@ -1,0 +1,25 @@
+import java.util.Scanner;
+public class Main{
+     // Finding Factorial
+        static int fact(int n){
+           int ans = 1;
+           for(int i=1;i<=n;i++){
+            ans = ans * i;
+           }
+          return ans;
+        }
+        public static void main(String[] args){
+        Scanner scan = new Scanner(System.in);
+        System.out.println("Enter n ");
+        int n = scan.nextInt(); //5
+        System.out.println("Enter r");
+        int r = scan.nextInt();
+
+        int ans1 = fact(n);
+        int ans2 = fact(r);
+        int ans3 = fact(n-r);
+
+        int ans = ans1/(ans2*ans3);
+        System.out.println("The combination result is "+ans);
+    }
+}
