@@ -27,23 +27,8 @@ Expected output
 30 
 
 
-
-
-
-//T.C : O(N^3)
-
-import java.util.Scanner;
- public class Main {
-	public static void main(String[] args) {
-		// write your code here
-		Scanner scan = new Scanner(System.in);
-		int n = scan.nextInt();
-		int arr[] = new int[n];
-
-        for(int i=0;i<n;i++){
-			arr[i] = scan.nextInt();
-		}
-        
+//T.C : O(N^3) , S.C: O(1) (Better)
+    
 		for(int i=0;i<n;i++){	//starting point
 			for(int j=i;j<n;j++){	//ending point
 				for(int k=i;k<=j;k++){ //runner(runs from i to j)
@@ -52,6 +37,14 @@ import java.util.Scanner;
 				System.out.println();
 			}
 		}	
-	}
-	
-}
+
+// //T.C : O(N^3) , S.C: O(N)
+
+// T.C: O(N^3) = O(N^2) in looping * O(N) in copying , S.C: O(N) Because the string length scales linearly with the size of the array n.
+
+       for(int i=0;i<n;i++){
+         StringBuilder sb = new StringBuilder();
+            for(int j=i;j<n;j++){
+                System.out.println(sb.append(arr[j]+" "));
+            }
+       }
