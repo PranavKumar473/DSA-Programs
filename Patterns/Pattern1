@@ -1,0 +1,17 @@
+5
+*
+**
+***
+****
+*****
+
+        int nst = 1; // no. of star
+
+        for(int i=0;i<n;i++){
+            for(int j=0;j<nst;j++){ 
+            System.out.print("*");
+            }
+          nst++; // row no. and no. of col going hand in hand
+          System.out.println();
+        }
+
