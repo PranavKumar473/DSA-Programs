@@ -15,3 +15,18 @@
           System.out.println();
         }
 
+
+
+*****
+****
+***
+**
+*
+         int nst = n;//5
+        for(int i=1;i<=n;i++){
+            for(int j=1;j<=nst;j++){ 
+            System.out.print("*");
+            }
+            nst--; // n and nst going hand in hand
+            System.out.println();
+        }
