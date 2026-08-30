@@ -1,0 +1,72 @@
+Sample Input and Output:
+
+Enter the size of the array
+3
+Enter the 3 array elements
+1 2 3
+Expected Output:
+1 3 6 2 5 3
+3
+6
+2
+5
+3
+
+1. Brute Force
+Code: T.C: O(N^3),    O(1)- Auxially space, O(N) - Total space bcoz i made an array to input elements of an array.
+
+
+   static void PrintAllSubArrays(int[] arr){
+	    int n = arr.length;
+		for(int i=0;i<n;i++){
+          for(int j=i;j<n;j++){
+            int sum = 0;
+			for(int k=i;k<=j;k++){
+				sum = sum + arr[k];
+			}
+			System.out.print(sum+" ");
+		  }
+	   }
+   }
+2. Better 
+Code: T.C: O(N^2),    S.C: O(N) - Auxillary space
+
+
+   static void PrintAllSubArrays(int[] arr){
+	    int n = arr.length;
+        int[] prefix = new int[n];               //1. Creating an array to store prefix sum
+        prefix[0] = arr[0];
+        for(int i=1;i<n;i++){                     
+            prefix[i] = prefix[i-1] + arr[i];    //2. Calculating prefix sum and storing at indexes.
+        }
+        
+		for(int i=0;i<n;i++){                    //3. Start point is fixed and increments once j runs from i till end
+          for(int j=i;j<n;j++){                  //4. j runs from i till end
+             int sum = (i==0)? prefix[j]:prefix[j] - prefix[i-1]; 
+// if start point is index 0 then just retrieve prefix sum of those indexes . 
+//but if start index is 1 or 2 and so on then you have calculate prefix sum :
+//from that starting point till j by considering prefix sum of j and subtracting the prefix sum of just before the starting point(i-1)
+             System.out.print(sum+" ");
+             }
+	    }
+	} 
+   
+
+3. Best
+Code: T.C: O(N^2),    S.C: O(1)- Auxially space, O(N) - Total space bcoz i made an array to input elements of an array.
+
+   static void PrintAllSubArrays(int[] arr){
+	    int n = arr.length;
+		for(int i=0;i<n;i++){
+            int sum = 0;
+          for(int j=i;j<n;j++){
+            sum = sum + arr[j];
+			System.out.print(sum+" ");
+		  }
+		}
+    }
+   
+	
+   
+	
+	
