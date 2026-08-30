@@ -30,28 +30,44 @@ Input
 Expected output
 9
 
+T.C: O(N^3), S.C: O(1)
+
+          static void boundedMax(int[] arr,int left, int right){
+	    int n = arr.length;
+        	int count = 0; // This will count the valid subarrays
+                for(int i=0;i<n;i++){
+         	   for(int j=i;j<n;j++){
+                   int ans = Integer.MIN_VALUE;//to check if elements lies in the range of left and right.
+              	      for(int k=i;k<=j;k++){
+              	         ans = Math.max(arr[k],ans);// Till whatever the element is read which one is the maximum element
+              	    }
+                   if(ans>=left && ans<=right){ // Is that maximum lies between the range of left and right,
+                    count++;
+                }
+            }
+        }
+        System.out.println(count);
+   }
+
 ----------------------------------------------------
 T.C: O(N^2), S.C: O(1)
 
-import java.util.Scanner;
-public class Main {
-    static void boundedMaximum(int[] nums, int left, int right){
+
+   	 static void boundedMaximum(int[] nums, int left, int right){
 		int n = nums.length;
 		int count = 0;
 		for(int i=0;i<n;i++){
-        int currentMax = Integer.MIN_VALUE;
-		for(int j=i;j<n;j++){
-        currentMax = Math.max(currentMax,nums[j]);
+       		 int currentMax = Integer.MIN_VALUE;
+			for(int j=i;j<n;j++){
+        		currentMax = Math.max(currentMax,nums[j]);
 
-        if(currentMax>=left && currentMax<=right){
+        		if(currentMax>=left && currentMax<=right){
 			  count++;
 			 }
-		 }
-  }
-	 System.out.println(count); 
+		       }
+                }
+	     System.out.println(count); 
 	}
-
-
 -----------------------------------------------------
 
 
