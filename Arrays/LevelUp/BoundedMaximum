@@ -52,21 +52,19 @@ T.C: O(N^3), S.C: O(1)
 ----------------------------------------------------
 T.C: O(N^2), S.C: O(1)
 
-
    	 static void boundedMaximum(int[] nums, int left, int right){
 		int n = nums.length;
 		int count = 0;
 		for(int i=0;i<n;i++){
-       		 int currentMax = Integer.MIN_VALUE;
-			for(int j=i;j<n;j++){
-        		currentMax = Math.max(currentMax,nums[j]);
-
-        		if(currentMax>=left && currentMax<=right){
+       	int currentMax = Integer.MIN_VALUE;
+		   for(int j=i;j<n;j++){
+        	ans = Math.max(ans,nums[j]);
+            if(ans>=left && ans<=right){
 			  count++;
 			 }
-		       }
-                }
-	     System.out.println(count); 
+		   }
+        }
+	    System.out.println(count); 
 	}
 -----------------------------------------------------
 
