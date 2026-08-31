@@ -56,7 +56,7 @@ T.C: O(N^2), S.C: O(1)
 		int n = nums.length;
 		int count = 0;
 		for(int i=0;i<n;i++){
-       	int currentMax = Integer.MIN_VALUE;
+       	int ans = Integer.MIN_VALUE;
 		   for(int j=i;j<n;j++){
         	ans = Math.max(ans,nums[j]);
             if(ans>=left && ans<=right){
