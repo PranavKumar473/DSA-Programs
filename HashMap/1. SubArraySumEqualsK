@@ -1,1 +1,24 @@
+Revise Subarray and array with bounded maximum.
 
+Sample i/p: arr[3] : {1 1 1} , K=2.  
+       o/p: 2
+-----------------------------------------------------
+1. BruteForce : T.C: O(N^2) , S.C: O(1)
+
+static void subarraySumEqualsK(int[] arr,int k){
+	    int n = arr.length;
+      int count = 0;
+      for(int i=0;i<n;i++){             // starting point
+         int sum = 0;
+         for(int j=i;j<n;j++){          // start from i till end
+            sum = sum + arr[j];         // sum one by one and keep checking if it matches with K. When i=0, j=0,1,2,3, when i=1 j=1,2,3 and so on.
+            if(sum==k){
+              count++;                   // count valid subarrays
+            }
+          }
+      }
+        System.out.println(count);
+}  
+--------------------------------------------------------
+// HashMap 
+2. Best : 
