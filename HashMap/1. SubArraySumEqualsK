@@ -21,4 +21,22 @@ static void subarraySumEqualsK(int[] arr,int k){
 }  
 --------------------------------------------------------
 // HashMap 
-2. Best : 
+2. Best : T.C: O(N), S.C: O(N)
+
+       public static int equalsK(int[] arr, int k){
+		int n = arr.length;
+		int Psum[] = new int[n];
+		 Psum[0] = arr[0];
+		for(int i=1;i<n;i++){
+			Psum[i]=Psum[i-1]+arr[i];
+		}
+		HashMap<Integer,Integer> map = new HashMap<>();
+		map.put(0,1);
+        int ans = 0;
+		for(int ep=0;ep<n;ep++){
+			int diff = Psum[ep]-k;
+			ans += map.getOrDefault(diff,0);// Tracking counted ep only. "Did I ever see a prefix sum that matches this exact excess?" If yes i will add the value i.e frequency to the ans(that will tell totoal valid sp).
+		    map.put(Psum[ep],map.getOrDefault(Psum[ep],0)+1);//Add the current prefix sum to the map, or increment its frequency if already present
+		}
+		return ans;
+	}
