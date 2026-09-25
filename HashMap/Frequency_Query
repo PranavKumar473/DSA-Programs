@@ -1,0 +1,87 @@
+HashMap_FrequencyQueries
+Success rate: 29.66%
+Given N array elements and Q queries. For every query find frequency of element in array.
+
+Input Format:
+First line contains 2 integers N, M denoting size of the array and the number of queries.
+Second line contains the elements of the array.
+Third line contains M elements representin queries.
+
+Output Format:
+Output M integers in different lines denoting the frequency of each query.
+
+Constraints:
+1 <= arr.length <= 10^5
+1 <= arr[i], value <= 10^4
+0 <= left <= right < arr.length
+
+Sample test cases
+Input
+9 2
+2 8 6 9 8 6 8 2 11
+2 8
+Expected output
+2
+3
+
+Approach1: 
+
+static void frequency(int[] arr, int[] queries){
+HashMap<Integer,Integer> hmap = new HashMap<>();
+for(int num:arr){
+hmap.put(num,hmap.getOrDefault(num,0)+1);
+}
+StringBuilder sb = new StringBuilder();
+for(int num:queries){
+	sb.append(hmap.getOrDefault(num,0)).append("\n");
+}
+System.out.print(sb.toString());
+}
+-------------------------------------------------------
+import java.util.*;
+public class Main {
+    static void frequency(int arr[],int queries[]){
+		HashMap<Integer,Integer> hm = new HashMap<>();
+
+		for(int i=0;i<arr.length;i++){
+			if(hm.containsKey(arr[i])==false){
+				hm.put(arr[i],1);
+			}else{
+				int temp = hm.get(arr[i]);
+				hm.put(arr[i],temp+1);
+			}
+		}
+		for(int i=0;i<queries.length;i++){
+			if(hm.containsKey(queries[i])==false){
+				System.out.println("0");
+			}else{
+				int count = hm.get(queries[i]);
+				System.out.println(count);
+			}
+		}
+	}
+
+
+	public static void main(String[] args) {
+		// write your code here
+    Scanner scan = new Scanner(System.in);
+    int size_of_array = scan.nextInt();
+	int no_of_queries = scan.nextInt();
+
+    int[] arr = new int[size_of_array];
+    int[] queries = new int[no_of_queries];
+
+	for(int i=0;i<size_of_array;i++){
+		arr[i] = scan.nextInt();
+	}
+    
+	for(int i=0;i<no_of_queries;i++){
+		queries[i] = scan.nextInt();
+	}
+
+	frequency(arr,queries);
+    scan.close();
+
+
+	}
+}
