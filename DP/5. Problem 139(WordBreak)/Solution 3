@@ -1,0 +1,26 @@
+class Solution {
+    public boolean wordBreak(String s, List<String> wordDict) {
+        
+    boolean[] dp = new boolean[s.length() + 1];
+        dp[0] = true; // Base case: empty string can always be formed
+
+        for (int i = 0; i < s.length(); i++) {
+            // If current index cannot be reached, skip it
+            if (!dp[i]) {
+                continue;
+            }
+
+            // Try matching every dictionary word starting from index i
+            for (String word : wordDict) {
+                int len = word.length();
+                
+                // Check if the word fits within bounds and matches s starting at index i
+                if (i + len <= s.length() && s.startsWith(word, i)) {
+                    dp[i + len] = true;
+                }
+            }
+        }
+
+        return dp[s.length()];
+    }
+}
