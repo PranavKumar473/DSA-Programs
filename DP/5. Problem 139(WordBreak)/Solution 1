@@ -1,0 +1,15 @@
+public boolean wordBreak(String s, List<String> wordDict) {
+HashMap<String, Boolean> memo = new HashMap<>(); 
+    public boolean wordBreak(String s, List<String> wordDict) {
+        if (s.length() == 0) return true; 
+        if (memo.containsKey(s)) return memo.get(s); 
+        for (String w : wordDict) {
+            if (s.startsWith(w) && wordBreak(s.substring(w.length()), wordDict)) {
+                memo.put(s, true); 
+                return true; 
+            }
+        }
+        memo.put(s, false); 
+        return false; 
+    }
+}
