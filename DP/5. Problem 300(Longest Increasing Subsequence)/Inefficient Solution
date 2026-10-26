@@ -1,0 +1,23 @@
+//Partial Correct (2/6 test cases passed)
+T.C: O(N^2), S.C: O(N)
+public static int LIS(int[] arr){
+		int n = arr.length;
+		int[] dp = new int[n];
+
+		Arrays.fill(dp,1);
+		return LIS(arr,dp);
+	}
+	public static int LIS(int[] arr, int[] dp){
+		int n = arr.length;
+		if(n<2){
+			return dp[0];
+		}
+		for(int i=1;i<n;i++){
+           for(int j=i-1;j>=0;j--){
+			if(arr[i]>arr[j]){
+				dp[i] = Math.max(dp[j]+1,dp[i]);
+			}
+		   }
+		}
+		return dp[n-1];
+	}
