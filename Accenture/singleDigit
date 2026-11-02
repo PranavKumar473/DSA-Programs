@@ -23,3 +23,30 @@ Output: `5`
 **Key Learning:** Use `while`, not `if`, because the operation may need to 
 repeat multiple times. Integer division automatically performs floor for
 positive integers.
+
+
+
+
+
+import java.util.Scanner;
+class Main {
+    public static int singleDigit(int n) {
+        while(n>=10){   // repeat until n is two digit
+        if(n%2!=0){     // odd
+          n = (int)Math.floor(n/2);
+        }else{          // even
+          n= (int)Math.floor((n-2)/2);
+        }
+    }
+        
+            return n;
+        
+}
+    public static void main(String[] args) {
+      Scanner scan = new Scanner(System.in);
+        int n = scan.nextInt();
+    
+        int result = singleDigit(n);
+        System.out.println(result);
+    }
+}
