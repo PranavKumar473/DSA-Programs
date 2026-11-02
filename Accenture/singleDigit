@@ -1,0 +1,25 @@
+Single Digit
+
+Problem: Reduce `N` to a single digit using:
+- Odd `N` → `N = N / 2`
+- Even `N` → `N = (N - 2) / 2`
+- Repeat until `N < 10`
+
+java
+public static int singleDigit(int n) {
+    while (n >= 10) {
+        if (n % 2 != 0)
+            n = n / 2;
+        else
+            n = (n - 2) / 2;
+    }
+    return n;
+}
+
+**Example:**  
+`25 → 12 → 5`  
+Output: `5`
+
+**Key Learning:** Use `while`, not `if`, because the operation may need to 
+repeat multiple times. Integer division automatically performs floor for
+positive integers.
