@@ -1,0 +1,17 @@
+ public static int findNumberOfSuperiorElements(int arr[], int n) {
+     int count = 0;
+        for(int i=0;i<n;i++){
+         boolean superior = true;
+         for(int j=i+1;j<n;j++){
+             if(arr[i]<=arr[j]){
+                 superior = false;
+                 break;
+             }
+         }
+     
+        if(superior){
+            count++;
+        }
+    }
+        return count;
+}
