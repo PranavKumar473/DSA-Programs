@@ -21,20 +21,21 @@ class Solution {
     }
 }
 
-Approach 2: Without using extra space (T.C: O(N), S.C: O(1))
+Approach 2: Without using extra space (T.C: O(N), S.C: O(1))  --> in place
 
 class Solution {
     public ListNode reverseList(ListNode head) {
+        ListNode prev = null;
+        ListNode curr = head;
 
-      ListNode curr = head;
-      ListNode prev = null;
-      while(curr!=null){
-      ListNode currP1 = curr.next;
-      curr.next = prev;
-      prev = curr;
-      curr = currP1;  
-      }
-      head = prev;
-      return head;
+        while(curr != null){
+        ListNode nextNode = curr.next;
+                  curr.next = prev;
+                   prev = curr;
+                   curr = nextNode;
+        }
+          head = prev;
+
+          return head;
     }
 }
