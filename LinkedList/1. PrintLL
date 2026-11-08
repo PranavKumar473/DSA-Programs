@@ -1,0 +1,53 @@
+// Online Java Compiler (Editor)
+// Write and run Java online using this editor.
+
+import java.util.Scanner;
+class Node{
+    int val;
+    Node next;
+
+    public Node(int val){
+        this.val = val;
+        this.next = null;
+    }
+}
+class Main {
+   
+    static void printLL(Node head)
+    {
+        Node temp = head;
+        while(temp !=null){
+            System.out.print(temp.val+"->");
+            temp = temp.next;
+        }      
+        System.out.print("null");
+    }   
+    
+    public static void main(String[] args) {
+        Scanner scan = new Scanner(System.in);
+        Node head = null;
+        for(int i=0;i<4;i++){
+        int value = scan.nextInt();
+        Node newNode = new Node(value);
+
+            if(head == null){
+                head = newNode;
+            }else{
+                Node temp = head;
+
+Remember:
+- temp != null — Used when traversing or printing the entire list.
+- temp.next != null — Used when you want to stop at the last node, such as inserting at the end.
+                
+                while(temp.next!=null){
+                   temp = temp.next;
+                }
+                temp.next = newNode;
+                
+            }
+        }
+            printLL(head);
+    }
+}
+Input: 10 20 30 40 
+Output:10->20->30->40->null
