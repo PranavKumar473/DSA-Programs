@@ -1,0 +1,40 @@
+Approach 1: Using Stack (T.C: O(N) , S.C: O(N))
+
+class Solution {
+    public ListNode reverseList(ListNode head) {
+        
+        Stack<Integer> valueStack = new Stack<>();
+        while(head!=null){
+        valueStack.push(head.val);
+        head = head.next;
+        }
+
+        ListNode reversedList = new ListNode(Integer.MIN_VALUE);
+         ListNode ptr = reversedList;
+
+            while(!valueStack.isEmpty()){
+            ptr.next   = new ListNode(valueStack.pop());
+            ptr = ptr.next;
+        }
+
+        return reversedList.next;
+    }
+}
+
+Approach 2: Without using extra space (T.C: O(N), S.C: O(1))
+
+class Solution {
+    public ListNode reverseList(ListNode head) {
+
+      ListNode curr = head;
+      ListNode prev = null;
+      while(curr!=null){
+      ListNode currP1 = curr.next;
+      curr.next = prev;
+      prev = curr;
+      curr = currP1;  
+      }
+      head = prev;
+      return head;
+    }
+}
