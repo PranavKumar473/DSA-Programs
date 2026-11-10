@@ -1,0 +1,45 @@
+i/p: arr[11]: [2,6,3,8,2,8,2,3,8,10,6]
+    queries[4]: [2,8,3,5]
+o/p: 2 appears 3 times
+     8 appears 3 times
+     3 appears 2 times 
+     5 appears 0 times
+
+// Online Java Compiler (Editor)
+// Write and run Java online using this editor.
+import java.util.*;
+class Main {
+    public static void frequency(int[] arr, int[] queries){
+        int x = arr.length;
+        int y = queries.length;
+        HashMap<Integer, Integer> hmap = new HashMap<>();
+
+        for(int i=0;i<x;i++){
+            hmap.put(arr[i], hmap.getOrDefault(arr[i],0)+1);
+        }
+        for(Map.Entry<Integer,Integer> freq: hmap.entrySet()){
+            int key = freq.getKey();
+            int value = freq.getValue();
+
+            for(int i=0;i<y;i++){
+            if(queries[i]==key){
+                System.out.println(key + " appears "+ value + " times");
+            }
+         }
+        }
+            for(int i=0;i<y;i++){
+                if(!hmap.containsKey(queries[i])){
+                    System.out.println(queries[i]+" appears 0 times");
+                
+            }
+        }  
+    }
+    public static void main(String[] args) {
+        
+      Scanner scan = new Scanner(System.in);
+        int arr[] = {2,6,3,8,2,8,2,3,8,10,6};
+        int queries[] = {2,8,3,5};          
+        frequency(arr, queries);
+    }
+}
+
