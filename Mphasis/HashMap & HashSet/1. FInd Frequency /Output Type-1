@@ -1,0 +1,40 @@
+i/p: arr[11]: [2 6 3 8 2 8 2 3 8 10 6]
+   queries[4]:  [2 8 3 5]
+o/p: 3 3 2 0 
+
+
+import java.util.*;
+class Main {
+    public static void frequency(int[] arr, int[] queries, int x, int y){
+        HashMap<Integer, Integer> hmap = new HashMap<>();
+
+        for(int i=0;i<x;i++){
+            // Fill array elements alongwith thier occurence/frequency in hashmap
+           hmap.put(arr[i],hmap.getOrDefault(arr[i],0)+1);
+    
+        }
+       for(int i=0;i<y;i++){
+           // Get the values of the key elements in query array from hashmap
+           System.out.print(hmap.getOrDefault(queries[i],0)+" ");
+           
+       }
+    }
+    public static void main(String[] args) {
+        
+      Scanner scan = new Scanner(System.in);
+       // Taking input for size of array and queries
+        int x = scan.nextInt();
+        int y = scan.nextInt();
+
+        int arr[] = new int[x];
+        int queries[] = new int[y];
+
+        for(int i=0;i<x;i++){
+            arr[i] = scan.nextInt();
+        }
+        for(int i=0;i<y;i++){
+            queries[i] = scan.nextInt();
+        }
+        frequency(arr, queries,x,y);
+    }
+}
