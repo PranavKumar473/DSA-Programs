@@ -1,0 +1,121 @@
+## LeetCode 169 — Majority Element
+
+**Pattern:** HashMap → Boyer–Moore Voting Algorithm  
+**Difficulty:** Easy
+
+### 1. Problem Statement
+
+Find the element appearing **more than `n/2` times** in an array. A majority element is guaranteed to exist.
+
+**Input:** `[2,2,1,1,1,2,2]`  
+**Output:** `2` (appears 4 times, and 4 > 7/2)
+
+---
+
+### 2. Approach 1 — HashMap (Frequency Counting)
+
+**Logic:**
+1. Store each element and its frequency using `getOrDefault()`.
+2. Traverse the HashMap using `entrySet()`.
+3. Return the element whose frequency is greater than `n/2`.
+
+```java
+import java.util.*;
+
+class Solution {
+    public int majorityElement(int[] nums) {
+        int n = nums.length;
+        HashMap<Integer, Integer> map = new HashMap<>();
+
+        for (int num : nums) {
+            map.put(num, map.getOrDefault(num, 0) + 1);
+        }
+
+        for (Map.Entry<Integer, Integer> entry : map.entrySet()) {
+            if (entry.getValue() > n / 2) {
+                return entry.getKey();
+            }
+        }
+
+        return -1;
+    }
+}
+```
+
+**Time:** O(n) average | **Space:** O(n)
+
+---
+
+### 3. Approach 2 — Boyer–Moore Voting (Optimal)
+
+**Core Idea:** Cancel one occurrence of the current candidate against every different element.
+
+**Logic:**
+1. If `count == 0`, select a new candidate.
+2. If the element matches the candidate, increment `count`.
+3. Otherwise, decrement `count`.
+4. Return the final candidate.
+
+```java
+class Solution {
+    public int majorityElement(int[] nums) {
+        int candidate = 0;
+        int count = 0;
+
+        for (int num : nums) {
+            if (count == 0) {
+                candidate = num;
+            }
+
+            if (num == candidate) {
+                count++;
+            } else {
+                count--;
+            }
+        }
+
+        return candidate;
+    }
+}
+```
+
+**Time:** O(n) | **Space:** O(1)
+
+### 4. Quick Dry Run — Boyer–Moore
+
+**Input:** `[2,2,1,1,1,2,2]`
+
+| Element | Candidate | Count |
+|---|---|---|
+| 2 | 2 | 1 |
+| 2 | 2 | 2 |
+| 1 | 2 | 1 |
+| 1 | 2 | 0 |
+| 1 | 1 | 1 |
+| 2 | 1 | 0 |
+| 2 | 2 | 1 |
+
+**Output:** `2`
+
+### 5. Complexity Comparison
+
+| Approach | Time | Space |
+|---|---|---|
+| Brute Force (nested loops) | O(n²) | O(1) |
+| HashMap (frequency counting) | O(n) average | O(n) |
+| Boyer–Moore (optimal) | O(n) | O(1) |
+
+### 6. Important Interview Points
+
+- **Majority ≠ Most frequent:** Majority means frequency strictly greater than `n/2`.
+- **Why Boyer–Moore works:** The majority element occurs more times than all other elements combined, so it survives cancellation.
+- **Why O(1) space?** Only two variables (`candidate` and `count`) are maintained.
+- **Why O(n) time?** The array is traversed only once.
+- **Edge case:** For a single-element array, that element is the majority.
+- **Important:** Boyer–Moore assumes a majority exists. Otherwise, verify the candidate in a second pass.
+
+### 7. One-Line Revision Tricks
+
+**HashMap:** Count frequencies → Find frequency > n/2 → Return key.
+
+**Boyer–Moore:** Count zero → Choose candidate → Same +1 → Different −1 → Return candidate.
